@@ -10,6 +10,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/?page=home">Accueil</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/?page=admin">Admin</a>
+                    </li>
                 </ul>
             </div>
         </div>
