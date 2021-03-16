@@ -10,6 +10,7 @@ if (isset($_POST['categorySubmit'])) {
         $addCategory->execute([
                 "name" => $categoryName,
         ]);
+        echo '<p>La nouvelle Catégorie a été créée, <a href="?page=home">cliquez ici</a> pour la voir</p>';
     }
 }
 
