@@ -41,49 +41,55 @@ if (isset($_POST['articleSubmit'])) {
 }
 
 ?>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nom de l'article</th>
-      <th scope="col">Auteur</th>
-      <th scope="col">Introduction</th>
-      <th scope="col">Date de Publication</th>
-    </tr>
-  </thead>
-  <tbody>
-      <?php $query = $database->query('SELECT `articleName`, `author`, `chapeau`, `publiched_date` FROM `articles` WHERE `category_id` =' . $dataID['id']);
-            while (($dataArticle = $query->fetch())) { ?>
-    <tr>
-      <th scope="row"><?= $dataArticle['articleName']; ?></th>
-      <td><?= $dataArticle['author']; ?></td>
-      <td><?= $dataArticle['chapeau']; ?></td>
-      <td><?= $dataArticle['publiched_date']; ?></td>
-    </tr>
+<div class="home">
 
-    <?php } ?>
-  </tbody>
-</table>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Nom de l'article</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Introduction</th>
+                <th scope="col">Date de Publication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $query = $database->query('SELECT `id`, `articleName`, `author`, `chapeau`, `publiched_date` FROM `articles` WHERE `category_id` =' . $dataID['id']);
+                while (($dataArticle = $query->fetch())) { ?>
+                <tr>
+                    <th scope="row"><a href="?page=article&id=<?= $dataArticle['id']; ?>"> <?= $dataArticle['articleName']; ?></a></th>
+                    <td><?= $dataArticle['author']; ?></td>
+                    <td><?= $dataArticle['chapeau']; ?></td>
+                    <td><?= $dataArticle['publiched_date']; ?></td>
+                </tr>
 
-<hr>
+                <?php } ?>
+            </tbody>
+        </table>
 
-<div class="col-md-6">
-    <h2>Ajouter un article</h2>
-    <form action="?page=category&id=<?=$dataID['id']; ?>" method="POST">
-        <div class="form-group mb-3">
-            <label for="articleName" class="form-label">Nom de l'article :</label>
-            <input type="text" class="form-control" name="articleName" id="articleName" placeholder="Toto va à la plage">
+        <hr>
+
+        <div class="col-md-6">
+            <h2>Ajouter un article</h2>
+            <form action="?page=category&id=<?=$dataID['id']; ?>" method="POST">
+                <div class="form-group mb-3">
+                    <label for="articleName" class="form-label">Nom de l'article :</label>
+                    <input type="text" class="form-control" name="articleName" id="articleName" placeholder="Toto va à la plage">
+                </div>
+
+                <div class="form-group">
+                    <label for="chapeau" class="form-label">Introduction de l'article :</label>
+                    <textarea class="form-control" id="chapeau" name="chapeau" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contentArticle" class="form-label">Contenu de l'article :</label>
+                    <textarea class="form-control" id="contentArticle" name="contentArticle" rows="3"></textarea>
+                </div>
+
+                <input type="submit" class="btn btn-primary my-3" name="articleSubmit">
+            </form>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="chapeau" class="form-label">Introduction de l'article :</label>
-            <textarea class="form-control" id="chapeau" name="chapeau" rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="contentArticle" class="form-label">Contenu de l'article :</label>
-            <textarea class="form-control" id="contentArticle" name="contentArticle" rows="3"></textarea>
-        </div>
-
-        <input type="submit" class="btn btn-primary my-3" name="articleSubmit">
-    </form>
 </div>
