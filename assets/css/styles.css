@@ -1,3 +1,12 @@
+.categoryBlock,
+.articleBlock,
+.commentBlock {
+  background: white;
+  border: 1px solid #e1e1e1;
+  margin: 15px auto;
+  box-shadow: 7px 7px 0 0 #e1e1e1;
+}
+
 nav .logo img {
   max-width: 100px;
 }
@@ -10,9 +19,12 @@ body {
 
 .home {
   flex-grow: 1;
+  padding: 25px;
+  background: #ececec;
 }
 
-h1 {
+h1,
+h2 {
   font-weight: 700;
   text-align: center;
 }
@@ -20,6 +32,12 @@ h1 {
 hr {
   margin: 25px auto;
   width: 250px;
+}
+
+a {
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 footer {
