@@ -43,8 +43,8 @@ if (isset($_POST['articleSubmit'])) {
 <div class="home">
 
     <div class="container">
-        <table class="table">
-            <thead>
+        <table class="col-12 table">
+            <thead class="thead-dark">
                 <tr>
                 <th scope="col">Nom de l'article</th>
                 <th scope="col">Auteur</th>
@@ -58,7 +58,7 @@ if (isset($_POST['articleSubmit'])) {
                 <tr>
                     <th scope="row"><a href="?page=article&id=<?= $dataArticle['id']; ?>"> <?= $dataArticle['articleName']; ?></a></th>
                     <td><?= $dataArticle['author']; ?></td>
-                    <td><?= $dataArticle['chapeau']; ?></td>
+                    <td><?= substr($dataArticle['chapeau'], 0, 50); ?></td>
                     <td><?= $dataArticle['publiched_date']; ?></td>
                 </tr>
 

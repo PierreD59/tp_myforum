@@ -16,5 +16,5 @@ $deleteCategory = $database->prepare("DELETE FROM `categorys` WHERE id = :id ");
 $deleteCategory->execute([
     "id" => $id,
 ]);
+header('Location:?page=admin');
 
-header('Location:?page=home');

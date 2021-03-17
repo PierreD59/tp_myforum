@@ -1,6 +1,3 @@
-nav {
-  height: 10vh;
-}
 nav .logo img {
   max-width: 100px;
 }
@@ -13,6 +10,16 @@ body {
 
 .home {
   flex-grow: 1;
+}
+
+h1 {
+  font-weight: 700;
+  text-align: center;
+}
+
+hr {
+  margin: 25px auto;
+  width: 250px;
 }
 
 footer {

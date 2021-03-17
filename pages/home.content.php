@@ -12,5 +12,4 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
     <div><a href="?page=category&id=<?= $dataCategory['id']; ?>"><?= $dataCategory['name']; ?></a></div>
     <?php } ?>
 
-
 </div>
