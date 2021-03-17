@@ -19,10 +19,9 @@ if (isset($_POST['articleSubmit'])) {
             $chapeau = htmlspecialchars($_POST['chapeau']);
             if (isset($_POST['contentArticle']) && !empty($_POST['contentArticle'])) {
                 $content = htmlspecialchars($_POST['contentArticle']);
-                var_dump($_POST);
-                $addArticle = $database->prepare("INSERT INTO `articles`(`name`, `content`, `publiched_date`, `author` ,`chapeau`, `category_id`) VALUES (:name, :content, :publiched_date, :author, :chapeau, :category_id)");
-                $toto = $addArticle->execute([
-                    "name" => $articleName,
+                $addArticle = $database->prepare("INSERT INTO `articles`(`articleName`, `content`, `publiched_date`, `author` ,`chapeau`, `category_id`) VALUES (:articleName, :content, :publiched_date, :author, :chapeau, :category_id)");
+                $addArticle->execute([
+                    "articleName" => $articleName,
                     "content" => $content,
                     "publiched_date" => date("Y-m-d H:i:s"),
                     "author" => "toto",

@@ -17,4 +17,4 @@ $deleteCategory->execute([
     "id" => $id,
 ]);
 
-header('Location:' . $_SERVER['HTTP_REFERER']);
+header('Location:?page=home');
