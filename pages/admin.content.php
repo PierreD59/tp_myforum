@@ -18,6 +18,29 @@ if (isset($_POST['categorySubmit'])) {
 ?>
 <div class="home">
     <div class="container my-5">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>                
+                </tr>
+            </thead>
+            <tbody>
+                <?php $query = $database->query('SELECT * FROM `categorys`');
+                while (($data = $query->fetch())) { ?>
+                <tr>
+                    <td><?= $data['id']; ?></td>
+                    <td><?= $data['name']; ?></td>
+                    <td><a href="?page=edit&id=<?= $data['id']; ?>"><i class="fas fa-cog p-1"></i></a></td>
+                    <td><a href="?page=delete&id=<?= $data['id']; ?>"><i class="fas fa-times p-1"></i></a></td>
+                </tr>
+
+                <?php } ?>
+            </tbody>
+        </table>
+        
         <h1 class="text-center">Page Administrateur</h1>
         <hr class="my-5">
         <div class="row m-0 p-0">
