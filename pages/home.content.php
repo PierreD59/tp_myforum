@@ -19,13 +19,11 @@ if (isset($_POST['categorySubmit'])) {
 
     <h1>Accueil</h1>
     <hr>
+
     <?php $query = $database->query('SELECT * FROM `categorys`');
-            while (($dataCategory = $query->fetch())) { ?>
-
-            <div class="categoryBlock p-3"><a href="?page=category&id=<?= $dataCategory['id']; ?>"><?= $dataCategory['name']; ?></a></div>
-
-    <?php } ?>
-
+        while (($checkIfEmpty = $dataCategory = $query->fetch())) { ?>
+                <div class="categoryBlock p-3"><a href="?page=category&id=<?= $dataCategory['id']; ?>"><?= $dataCategory['name']; ?></a></div>
+        <?php } ?>
 
         <hr>
         <div class="col-md-6 row m-auto p-0">

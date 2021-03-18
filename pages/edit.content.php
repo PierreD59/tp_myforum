@@ -1,28 +1,28 @@
 <?php
 $database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 
-// Call category's ID
+// Calls the ID of the category table
 $query = $database->prepare('SELECT * FROM `categorys` WHERE `id` = :id');
 $query->execute([
      "id" => $_GET['id'],
      ]);
 $category = $query->fetch();
 
-// Call article's ID
+// Calls the ID of the article table
 $query = $database->prepare('SELECT * FROM `articles` WHERE `id` = :id');
 $query->execute([
      "id" => $_GET['id'],
      ]);
 $article = $query->fetch();
 
-// Call comment's ID
+// Calls the ID of the comment table
 $query = $database->prepare('SELECT * FROM `comments` WHERE `id` = :id');
 $query->execute([
      "id" => $_GET['id'],
      ]);
 $comment = $query->fetch();
 
-// Edit Category
+// Checks the form data and edits the category
 if (isset($_POST['editCategorySubmit'])) {
     if(isset($_POST['editNameCategory']) && !empty($_POST['editNameCategory'])) {
         $editName = htmlspecialchars($_POST['editNameCategory']);
@@ -33,7 +33,7 @@ if (isset($_POST['editCategorySubmit'])) {
     }
 }
 
-// Edit Article
+// Checks the data in the form and edits the article
 if (isset($_POST['editArticle'])) {
     if(isset($_POST['editArticleName']) && !empty($_POST['editArticleName'])) {
         $editNameArticle = htmlspecialchars($_POST['editArticleName']);
@@ -55,7 +55,7 @@ if (isset($_POST['editArticle'])) {
     }
 }
 
-// Edit Comment
+// Checks the form data and edits the comment
 if (isset($_POST['editComment'])) {
     if(isset($_POST['editContent']) && !empty($_POST['editContent'])) {
         $editContent = htmlspecialchars($_POST['editContent']);
