@@ -55,6 +55,19 @@ if (isset($_POST['editArticle'])) {
     }
 }
 
+// Edit Comment
+if (isset($_POST['editComment'])) {
+    if(isset($_POST['editContent']) && !empty($_POST['editContent'])) {
+        $editContent = htmlspecialchars($_POST['editContent']);
+
+        $editArticle = $database->prepare("UPDATE `comments` SET `comment`= :comment WHERE `id` =" . $_GET['id']);
+        $toto = $editArticle->execute([
+            "comment" => $editContent,
+            ]);
+    } 
+}
+
+
 
 
 ?>
@@ -105,8 +118,8 @@ if (isset($_POST['editArticle'])) {
             <form method="post" class="p-3" action="?page=edit&id=<?= $comment['id']; ?>">
 
                 <div class="form-group mb-3">
-                    <label for="comment" class="form-label">Editez votre commentaire</label>
-                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>                
+                    <label for="editContent" class="form-label">Editez votre commentaire</label>
+                    <textarea class="form-control" id="editContent" name="editContent" rows="3"><?= $comment['comment']; ?></textarea>                
                 </div>
                 <input type="submit" class="btn btn-primary my-3" name="editComment">
 
