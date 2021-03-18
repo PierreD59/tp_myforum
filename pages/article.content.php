@@ -5,30 +5,37 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 $query = $database->query('SELECT * FROM `articles` WHERE `id` =' . $_GET['id']);
 $data = $query->fetch();
 
-// Checks the POSTS of the comment form and sends them to the DB
+// Calls up the content of the article in relation to its ID
+$query = $database->prepare('SELECT `id` FROM `users`');
+$query->execute([
+     "id" => ":id",
+     ]);
+$user = $query->fetch();
 
+
+
+if(isset($_SESSION['pseudo'])) {
+    $pseudo = $_SESSION['pseudo'];
+} elseif(isset($_POST['pseudo']) && !empty($_POST['pseudo']) ){
+    $pseudo = $_POST['pseudo'];
+} else {
+    $pseudo = "Anne Onyme";
+}
+
+// Checks the POSTS of the comment form and sends them to the DB
 if (isset($_POST['commentSubmit'])) {
     if (isset($_POST['comment']) && !empty($_POST['comment'])) {
-        if (isset($_POST['pseudo']) && !empty($_POST['pseudo'])) {
-            $addComment = $database->prepare("INSERT INTO `comments`(`pseudo`, `comment`, `publiched_date`, `article_id`) VALUES (:pseudo, :comment, :publiched_date , :article_id)");
-            $addComment->execute([
-                "pseudo" => $_POST['pseudo'],
+            $addComment = $database->prepare("INSERT INTO `comments`(`pseudo`, `comment`, `publiched_date`, `article_id`, `user_id`) VALUES (:pseudo, :comment, :publiched_date, :article_id, :user_id)");
+            $toto = $addComment->execute([
+                "pseudo" => $pseudo,
                 "comment" => $_POST['comment'],
                 "publiched_date" => date("Y-m-d H:i:s"),
                 "article_id" => $_GET['id'],
+                "user_id" => $user['id'],
             ]);
-        } else {
-            $defaultPseudo = "Anne Onyme";
-            $addComment = $database->prepare("INSERT INTO `comments`(`pseudo`, `comment`, `publiched_date`, `article_id`) VALUES (:pseudo, :comment, :publiched_date , :article_id)");
-            $addComment->execute([
-                "pseudo" => $defaultPseudo,
-                "comment" => $_POST['comment'],
-                "publiched_date" => date("Y-m-d H:i:s"),
-                "article_id" => $_GET['id'],
-            ]);
-        }
-    }
-} ?>
+    } 
+}
+?>
 
 
 
@@ -62,15 +69,23 @@ if (isset($_POST['commentSubmit'])) {
                 <hr>
                 <form method="post" class="p-3" action="?page=article&id=<?= $data['id']; ?>">
                 
-                    <div class="form-group mb-3">
-                        <label for="pseudo" class="form-label">Votre pseudo</label>
-                        <input type="text" id="pseudo" class="form-control" name="pseudo" />
-                    </div>
 
+                <?php if(isset($_SESSION['pseudo'])) { ?>
                     <div class="form-group mb-3">
                         <label for="comment" class="form-label">Votre commentaire</label>
                         <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>                
                     </div>
+                <?php } else { ?>
+                    <div class="form-group mb-3">
+                        <label for="pseudo" class="form-label">Votre pseudo</label>
+                        <input type="text" id="pseudo" class="form-control" name="pseudo" value="<?= $pseudo ?>"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="comment" class="form-label">Votre commentaire</label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>                
+                    </div>
+                <?php } ?>
+
                     <input type="submit" class="btn btn-primary my-3" name="commentSubmit">
 
                 </form>
