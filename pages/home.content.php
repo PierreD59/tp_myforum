@@ -10,8 +10,7 @@ if (isset($_POST['categorySubmit'])) {
         $addCategory->execute([
                 "name" => $categoryName,
         ]);
-        echo '<p>La nouvelle Catégorie a été créée, <a href="?page=home">cliquez ici</a> pour la voir</p>';
-        header('location:?page=admin');
+        header('location:?page=home');
     }
 }
 
@@ -19,26 +18,32 @@ if (isset($_POST['categorySubmit'])) {
 <div class="home">
 
     <h1>Accueil</h1>
-
+    <hr>
     <?php $query = $database->query('SELECT * FROM `categorys`');
             while (($dataCategory = $query->fetch())) { ?>
 
-    <div><a href="?page=category&id=<?= $dataCategory['id']; ?>"><?= $dataCategory['name']; ?></a></div>
+            <div class="categoryBlock p-3"><a href="?page=category&id=<?= $dataCategory['id']; ?>"><?= $dataCategory['name']; ?></a></div>
+
     <?php } ?>
 
-        <div class="row m-0 p-0">
 
-            <div class="col-md-6">
-                <h2 class="text-center">Ajouter une Catégorie</h2>
-                <form action="?page=admin" method="POST">
+        <hr>
+        <div class="col-md-6 row m-auto p-0">
 
-                    <div class="mb-3">
-                        <label for="categoryName" class="form-label">Nom de la Categorie</label>
-                        <input type="text" class="form-control" id="categoryName" name="categoryName">
-                    </div>
-                    <input class="btn btn-primary" type="submit" name="categorySubmit" value="Ajouter une catégorie">       
+            <div class="categoryBlock">
+                <div class="p-5">
+                    <h2 class="text-center">Ajouter une Catégorie</h2>
+                    <hr>
+                    <form action="?page=home" method="POST">
 
-                </form>
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Nom de la Categorie</label>
+                            <input type="text" class="form-control" id="categoryName" name="categoryName">
+                        </div>
+                        <input class="btn btn-primary" type="submit" name="categorySubmit" value="Ajouter une catégorie">       
+
+                    </form>
+                </div>
             </div>
 
         </div>

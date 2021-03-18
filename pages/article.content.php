@@ -34,7 +34,7 @@ if (isset($_POST['commentSubmit'])) {
 
 <div class="home">
     <div class="container my-5">
-        <div class="article">
+        <div class="articleBlock article p-5">
             <h1><?= $data['articleName']; ?></h1>
             <hr>
             <p><?= $data['chapeau']; ?></p>
@@ -55,9 +55,11 @@ if (isset($_POST['commentSubmit'])) {
     <h2 class="text-center">Espace Commentaire</h2>
     <hr>
 
-    <div class="container-fluid my-3">
-        <div class="row m-0 p-0">
-            <div class="col-md-4 border-end m-3">
+    <div class="container my-3">
+        <div class="row d-flex justify-content-center m-0 p-0">
+            <div class="commentBlock p-5 col-md-4 border-end m-3">
+                <h2>Envoyer un commentaire</h2>
+                <hr>
                 <form method="post" class="p-3" action="?page=article&id=<?= $data['id']; ?>">
                 
                     <div class="form-group mb-3">
@@ -78,7 +80,7 @@ if (isset($_POST['commentSubmit'])) {
             <?php $query = $database->query('SELECT * FROM `comments` WHERE `article_id` =' . $_GET['id']);
             while (($dataComment = $query->fetch())) { ?>
 
-                <div class="bg-light border m-3 p-3">
+                <div class="commentBlock border m-3 p-3">
                     <div class="d-flex justify-content-end">
                         <a href="?page=edit&id=<?= $dataComment['id']; ?>"><i class="fas fa-cog p-1"></i></a>
                         <a href="?page=delete&id=<?= $dataComment['id']; ?>"><i class="fas fa-times p-1"></i></a>

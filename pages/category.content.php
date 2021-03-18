@@ -43,33 +43,38 @@ if (isset($_POST['articleSubmit'])) {
 <div class="home">
 
     <div class="container">
-        <table class="col-12 table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Nom de l'article</th>
-                <th scope="col">Auteur</th>
-                <th scope="col">Introduction</th>
-                <th scope="col">Date de Publication</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $query = $database->query('SELECT `id`, `articleName`, `author`, `chapeau`, `publiched_date` FROM `articles` WHERE `category_id` =' . $dataID['id']);
-                while (($dataArticle = $query->fetch())) { ?>
-                <tr>
-                    <th scope="row"><a href="?page=article&id=<?= $dataArticle['id']; ?>"> <?= $dataArticle['articleName']; ?></a></th>
-                    <td><?= $dataArticle['author']; ?></td>
-                    <td><?= substr($dataArticle['chapeau'], 0, 50); ?></td>
-                    <td><?= $dataArticle['publiched_date']; ?></td>
-                </tr>
+        <div class="articleBlock p-3">
 
-                <?php } ?>
-            </tbody>
-        </table>
+            <table class="col-12 table">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Nom de l'article</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Introduction</th>
+                    <th scope="col">Date de Publication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $query = $database->query('SELECT `id`, `articleName`, `author`, `chapeau`, `publiched_date` FROM `articles` WHERE `category_id` =' . $dataID['id']);
+                    while (($dataArticle = $query->fetch())) { ?>
+                    <tr>
+                        <th scope="row"><a href="?page=article&id=<?= $dataArticle['id']; ?>"> <?= $dataArticle['articleName']; ?></a></th>
+                        <td><?= $dataArticle['author']; ?></td>
+                        <td><?= substr($dataArticle['chapeau'], 0, 50); ?></td>
+                        <td><?= $dataArticle['publiched_date']; ?></td>
+                    </tr>
+
+                    <?php } ?>
+                </tbody>
+            </table>
+
+        </div>
 
         <hr>
 
-        <div class="col-md-6">
+        <div class="articleBlock p-5 col-md-6">
             <h2>Ajouter un article</h2>
+            <hr>
             <form action="?page=category&id=<?=$dataID['id']; ?>" method="POST">
                 <div class="form-group mb-3">
                     <label for="articleName" class="form-label">Nom de l'article :</label>

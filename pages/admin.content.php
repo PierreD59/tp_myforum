@@ -9,6 +9,7 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php'; ?>
         <!-- List of Category -->
         <div class="categoryBlock p-3">
             <h2>Liste des Catégories</h2>
+            <hr>
             <table class="col-12 text-center table">
                 <thead class="thead-light">
                     <tr>
@@ -33,6 +34,7 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php'; ?>
 
         <div class="categoryBlock p-3">
             <h2>Liste des Sujets</h2>
+            <hr>
             <table class="col-12 text-center table">
                 <thead class="thead-light">
                     <tr>
@@ -64,6 +66,7 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php'; ?>
         </div>
         <div class="categoryBlock p-3">
             <h2>Liste des Commentaires</h2>
+            <hr>
             <table class="col-12 text-center table">
                 <thead class="thead-light">
                     <tr>
