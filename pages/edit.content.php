@@ -32,6 +32,31 @@ if (isset($_POST['editCategorySubmit'])) {
         ]);
     }
 }
+
+// Edit Article
+if (isset($_POST['editArticle'])) {
+    if(isset($_POST['editArticleName']) && !empty($_POST['editArticleName'])) {
+        $editNameArticle = htmlspecialchars($_POST['editArticleName']);
+
+        if(isset($_POST['editChapeau']) && !empty($_POST['editChapeau'])) {
+            $editChapeau = htmlspecialchars($_POST['editChapeau']);
+
+            if(isset($_POST['editContentArticle']) && !empty($_POST['editContentArticle'])) {
+                $editContent = htmlspecialchars($_POST['editContentArticle']);
+
+                $editArticle = $database->prepare("UPDATE `articles` SET `articleName`= :articleName, `chapeau` = :chapeau, `content` = :content WHERE `id` =" . $_GET['id']);
+                $toto = $editArticle->execute([
+                    "articleName" => $editNameArticle,
+                    "chapeau" => $editChapeau,
+                    "content" => $editContent,
+                    ]);
+            } 
+        }
+    }
+}
+
+
+
 ?>
 <div class="home">
     <div class="container">
@@ -55,25 +80,39 @@ if (isset($_POST['editCategorySubmit'])) {
             <hr>
             <form action="?page=edit&id=<?=$article['id']; ?>" method="POST">
                 <div class="form-group mb-3">
-                    <label for="articleName" class="form-label">Nom de l'article :</label>
-                    <input type="text" class="form-control" name="articleName" id="articleName" value="<?= $article['articleName']; ?>">
+                    <label for="editArticleName" class="form-label">Nom de l'article :</label>
+                    <input type="text" class="form-control" name="editArticleName" id="editArticleName" value="<?= $article['articleName']; ?>">
                 </div>
 
                 <div class="form-group">
-                    <label for="chapeau" class="form-label">Introduction de l'article :</label>
-                    <textarea class="form-control" id="chapeau" name="chapeau" rows="3"></textarea>
+                    <label for="editChapeau" class="form-label">Introduction de l'article :</label>
+                    <textarea class="form-control" id="editChapeau" name="editChapeau" rows="3"><?= $article['chapeau']; ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="contentArticle" class="form-label">Contenu de l'article :</label>
-                    <textarea class="form-control" id="contentArticle" name="contentArticle" rows="3"></textarea>
+                    <label for="editContentArticle" class="form-label">Contenu de l'article :</label>
+                    <textarea class="form-control" id="editContentArticle" name="editContentArticle" rows="3"><?= $article['content']; ?></textarea>
                 </div>
 
-                <input type="submit" class="btn btn-primary my-3" name="articleSubmit">
+                <input type="submit" class="btn btn-primary my-3" name="editArticle">
+            </form>
+        </div>
+<?php } else { ?>
+
+        <div class="commentBlock p-5 col-md-4 border-end m-3">
+            <h2>Envoyer un commentaire</h2>
+            <hr>
+            <form method="post" class="p-3" action="?page=edit&id=<?= $comment['id']; ?>">
+
+                <div class="form-group mb-3">
+                    <label for="comment" class="form-label">Editez votre commentaire</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>                
+                </div>
+                <input type="submit" class="btn btn-primary my-3" name="editComment">
+
             </form>
         </div>
 <?php } ?>
-
     </div>
 </div>
 
