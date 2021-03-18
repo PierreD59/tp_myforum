@@ -9,6 +9,12 @@ $query->execute([
      ]);
 $dataID = $query->fetch();
 
+$query = $database->prepare('SELECT `id` FROM `users`');
+$query->execute([
+     "id" => ":id",
+     ]);
+$userID = $query->fetch();
+
 
 // Add Article
 if (isset($_POST['articleSubmit'])) {
@@ -19,14 +25,15 @@ if (isset($_POST['articleSubmit'])) {
             $chapeau = htmlspecialchars($_POST['chapeau']);
             if (isset($_POST['contentArticle']) && !empty($_POST['contentArticle'])) {
                 $content = htmlspecialchars($_POST['contentArticle']);
-                $addArticle = $database->prepare("INSERT INTO `articles`(`articleName`, `content`, `publiched_date`, `author` ,`chapeau`, `category_id`) VALUES (:articleName, :content, :publiched_date, :author, :chapeau, :category_id)");
+                $addArticle = $database->prepare("INSERT INTO `articles`(`articleName`, `content`, `publiched_date`, `author` ,`chapeau`, `category_id`, `user_id`) VALUES (:articleName, :content, :publiched_date, :author, :chapeau, :category_id, :user_id)");
                 $addArticle->execute([
                     "articleName" => $articleName,
                     "content" => $content,
                     "publiched_date" => date("Y-m-d H:i:s"),
-                    "author" => "toto",
+                    "author" => $_SESSION['pseudo'],
                     "chapeau" => $chapeau,
                     "category_id" => $_GET['id'],
+                    "user_id" => $userID['id'],
                 ]);
             } else {
                 echo "Entrez un contenu";
@@ -72,28 +79,32 @@ if (isset($_POST['articleSubmit'])) {
 
         <hr>
 
-        <div class="articleBlock p-5 col-md-6">
-            <h2>Ajouter un article</h2>
-            <hr>
-            <form action="?page=category&id=<?=$dataID['id']; ?>" method="POST">
-                <div class="form-group mb-3">
-                    <label for="articleName" class="form-label">Nom de l'article :</label>
-                    <input type="text" class="form-control" name="articleName" id="articleName" placeholder="Toto va à la plage">
-                </div>
+        <?php if(isset($_SESSION['pseudo'])) { ?>
+                    <div class="articleBlock p-5 col-md-6">
+                    <h2>Ajouter un article</h2>
+                    <hr>
+                    <form action="?page=category&id=<?=$dataID['id']; ?>" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="articleName" class="form-label">Nom de l'article :</label>
+                            <input type="text" class="form-control" name="articleName" id="articleName" placeholder="Toto va à la plage">
+                        </div>
 
-                <div class="form-group">
-                    <label for="chapeau" class="form-label">Introduction de l'article :</label>
-                    <textarea class="form-control" id="chapeau" name="chapeau" rows="3"></textarea>
-                </div>
+                        <div class="form-group">
+                            <label for="chapeau" class="form-label">Introduction de l'article :</label>
+                            <textarea class="form-control" id="chapeau" name="chapeau" rows="3"></textarea>
+                        </div>
 
-                <div class="form-group">
-                    <label for="contentArticle" class="form-label">Contenu de l'article :</label>
-                    <textarea class="form-control" id="contentArticle" name="contentArticle" rows="3"></textarea>
-                </div>
+                        <div class="form-group">
+                            <label for="contentArticle" class="form-label">Contenu de l'article :</label>
+                            <textarea class="form-control" id="contentArticle" name="contentArticle" rows="3"></textarea>
+                        </div>
 
-                <input type="submit" class="btn btn-primary my-3" name="articleSubmit">
-            </form>
-        </div>
+                        <input type="submit" class="btn btn-primary my-3" name="articleSubmit">
+                    </form>
+                </div>
+        <?php } else { ?>
+            <h2>Vous devez vous connecter pour créer un sujet</h2>
+        <?php } ?>
     </div>
 
 </div>
