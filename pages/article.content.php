@@ -5,33 +5,34 @@ $query = $database->query('SELECT * FROM `articles` WHERE `id` =' . $_GET['id'])
 $data = $query->fetch();
 
 // Calls up the content of the article in relation to its ID
-$query = $database->prepare('SELECT `id` FROM `users`');
-$query->execute([
-     "id" => ":id",
-     ]);
+$query = $database->prepare('SELECT * FROM `users`');
+$query->execute();
 $user = $query->fetch();
 
 
 
-if(isset($_SESSION['pseudo'])) {
+if (isset($_SESSION['pseudo'])) {
     $pseudo = $_SESSION['pseudo'];
-} elseif(isset($_POST['pseudo']) && !empty($_POST['pseudo']) ){
+    $userID = $_SESSION['id'];
+} else if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) ) {
     $pseudo = $_POST['pseudo'];
+    $userID = 9;
 } else {
     $pseudo = "Anne Onyme";
+    $userID = 9;
 }
-
 // Checks the POSTS of the comment form and sends them to the DB
 if (isset($_POST['commentSubmit'])) {
     if (isset($_POST['comment']) && !empty($_POST['comment'])) {
-            $addComment = $database->prepare("INSERT INTO `comments`(`pseudo`, `comment`, `publiched_date`, `article_id`, `user_id`) VALUES (:pseudo, :comment, :publiched_date, :article_id, :user_id)");
-            $toto = $addComment->execute([
-                "pseudo" => $pseudo,
-                "comment" => $_POST['comment'],
-                "publiched_date" => date("Y-m-d H:i:s"),
-                "article_id" => $_GET['id'],
-                "user_id" => $user['id'],
-            ]);
+        $addComment = $database->prepare("INSERT INTO `comments`(`pseudo`, `comment`, `publiched_date`, `article_id`, `user_id`) VALUES (:pseudo, :comment, :publiched_date, :article_id, :user_id)");
+        echo $_GET['id'] . "<br>" . $userID;
+        $addComment->execute([
+            "pseudo" => $pseudo,
+            "comment" => $_POST['comment'],
+            "publiched_date" => date("Y-m-d H:i:s"),
+            "article_id" => $_GET['id'],
+            "user_id" => $userID,
+        ]);
     } 
 }
 ?>

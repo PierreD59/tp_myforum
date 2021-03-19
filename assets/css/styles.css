@@ -1,6 +1,9 @@
 .categoryBlock,
 .articleBlock,
-.commentBlock {
+.commentBlock,
+.loginBlock,
+.registerBlock,
+.profileBlock {
   background: white;
   border: 1px solid #e1e1e1;
   margin: 15px auto;

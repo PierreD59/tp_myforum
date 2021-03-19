@@ -9,14 +9,18 @@ if (isset($_POST['categorySubmit'])) {
         $addCategory->execute([
                 "name" => $categoryName,
         ]);
-        header('location:?page=home');
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 }
 
 ?>
 <div class="home">
 
-    <h1>Accueil</h1>
+    <?php if(isset($_SESSION['pseudo'])) { ?>
+        <h1>Bonjour <?= ucfirst($_SESSION['pseudo']); ?>, bienvenue sur MyForum</h1>
+    <?php } else { ?>
+        <h1>Bonjour, bienvenue sur MyForum</h1>
+    <?php } ?>
     <hr>
 
     <?php $query = $database->query('SELECT * FROM `categorys`');

@@ -25,5 +25,5 @@ $deleteUser = $database->prepare("DELETE FROM `users` WHERE id = :id ");
 $deleteUser->execute([
     "id" => $id,
 ]);
-header('Location:?page=home');
+header("Location: " . $_SERVER['HTTP_REFERER']);
 
