@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 19 mars 2021 à 14:46
+-- Généré le : ven. 19 mars 2021 à 18:04
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.3.21
 
@@ -40,7 +40,14 @@ CREATE TABLE IF NOT EXISTS `articles` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `articles`
+--
+
+INSERT INTO `articles` (`id`, `articleName`, `content`, `publiched_date`, `author`, `chapeau`, `category_id`, `user_id`) VALUES
+(59, 'toto va à la plage', 'gdgdgdg', '2021-03-19', 'toto', 'gdgdgd', 18, 10);
 
 -- --------------------------------------------------------
 
@@ -53,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `categorys` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `categorys`
@@ -61,7 +68,8 @@ CREATE TABLE IF NOT EXISTS `categorys` (
 
 INSERT INTO `categorys` (`id`, `name`) VALUES
 (18, 'La Congolexicomatisation des lois du marché'),
-(23, 'Pays de Galles Indépendant');
+(23, 'Pays de Galles Indépendant'),
+(26, 'Hello');
 
 -- --------------------------------------------------------
 
@@ -80,7 +88,14 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `pseudo`, `comment`, `article_id`, `publiched_date`, `user_id`) VALUES
+(79, 'toto', 'toto', 59, '2021-03-19 16:33:44', 10);
 
 -- --------------------------------------------------------
 
@@ -108,8 +123,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `email_adress`, `password`, `illustration_image_url`, `registration_date`, `last_connection`) VALUES
-(10, 'toto', 'toto@gmail.com', '$2y$10$hgEmGLKCEpjQfrOH72VFS.O1a19zimn97sEyNkCQGO8XcQNnhucUC', '../assets/img/default.png', '2021-03-19', '2021-03-19 15:43:20'),
-(11, 'titi', 'titi@gmail.com', '$2y$10$TQHCqGR5YiM8kEgRLGB2qORkPF7rJqmQZihcIwg2/rT6w2WSqAHre', '../assets/img/default.png', '2021-03-19', '2021-03-19 15:43:20');
+(9, 'Anne Onyme', 'test@test.com', '1234', NULL, '2021-03-19', NULL),
+(10, 'Toto', 'toto@gmail.com', '$2y$10$hgEmGLKCEpjQfrOH72VFS.O1a19zimn97sEyNkCQGO8XcQNnhucUC', '../assets/img/default.png', '2021-03-19', '2021-03-19 19:01:50'),
+(11, 'Titi', 'titi@gmail.com', '$2y$10$TQHCqGR5YiM8kEgRLGB2qORkPF7rJqmQZihcIwg2/rT6w2WSqAHre', '../assets/img/default.png', '2021-03-19', '2021-03-19 16:43:21');
 
 --
 -- Contraintes pour les tables déchargées

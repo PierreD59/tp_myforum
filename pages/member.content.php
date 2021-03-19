@@ -16,16 +16,22 @@
                 </thead>
                 <tbody class="align-middle">
                     <?php $query = $database->query('SELECT * FROM `users`');
-                    while (($data = $query->fetch())) { ?>
+                    while (($data = $query->fetch())) { 
+                        
+                    $count = $database->prepare('SELECT * FROM `articles` WHERE user_id =' . $data['id']);
+                    $count->execute();
+                    $countArticle = $count->rowCount();
+
+                    $count = $database->prepare('SELECT * FROM `comments` WHERE user_id =' . $data['id']);
+                    $count->execute();
+                    $countComment = $count->rowCount();
+
+                    $countMessage = $countArticle + $countComment; ?>
                     <tr>
                         <td><a href="?page=profile&id=<?= $data['id']; ?>"><?= $data['pseudo']; ?></a></td>
                         <td><?= $data['registration_date']; ?></td>
                         <td><?= $data['last_connection']; ?></td>
-                        <?php $count = $database->prepare('SELECT * FROM `articles` WHERE user_id =' . $data['id']);
-                        $count->execute();
-                        $countUser = $count->rowCount(); ?>
-                        <td><?= $countUser; ?></td>
-                        <?php ?>
+                        <td><?= $countMessage; ?></td>
                         <td><a href="?page=delete&id=<?= $data['id']; ?>"><i class="fas fa-times p-1"></i></a></td>
                     </tr>
 
