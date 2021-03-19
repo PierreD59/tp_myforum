@@ -9,7 +9,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php if (isset($_SESSION['pseudo'])) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/?page=members">Membres</a>
+                            <a class="nav-link" href="/?page=member">Membres</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/?page=profile">Profil</a>

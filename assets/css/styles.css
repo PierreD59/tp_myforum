@@ -7,6 +7,10 @@
   box-shadow: 7px 7px 0 0 #e1e1e1;
 }
 
+.commentForm {
+  height: 100%;
+}
+
 nav .logo img {
   max-width: 100px;
 }

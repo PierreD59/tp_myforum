@@ -1,5 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 
 // Add Category
 if (isset($_POST['categorySubmit'])) {
@@ -21,7 +20,7 @@ if (isset($_POST['categorySubmit'])) {
     <hr>
 
     <?php $query = $database->query('SELECT * FROM `categorys`');
-        while (($checkIfEmpty = $dataCategory = $query->fetch())) { ?>
+        while (($dataCategory = $query->fetch())) { ?>
                 <div class="categoryBlock p-3"><a href="?page=category&id=<?= $dataCategory['id']; ?>"><?= $dataCategory['name']; ?></a></div>
         <?php } ?>
 

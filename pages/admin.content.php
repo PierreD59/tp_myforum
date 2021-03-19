@@ -1,6 +1,3 @@
-<?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php'; ?>
-
 <div class="home">
     <h1>Page Administrateur</h1>
     <hr>

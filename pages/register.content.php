@@ -1,6 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
-
 $imgDefault = "../assets/img/default.png";
 
 if (isset($_POST['submit'])) {
@@ -10,13 +8,14 @@ if (isset($_POST['submit'])) {
             $email = htmlspecialchars($_POST['email']);
             if (isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['confirmPassword']) && !empty($_POST['confirmPassword']) && $_POST['password'] === $_POST['confirmPassword']) {
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $addUser = $database->prepare("INSERT INTO `users`(`pseudo`, `password`, `email_adress`, `illustration_image_url`) VALUES (:pseudo, :password, :email_adress, :illustration_image_url)");
+                $addUser = $database->prepare("INSERT INTO `users`(`pseudo`, `password`, `email_adress`, `illustration_image_url`, `registration_date`) VALUES (:pseudo, :password, :email_adress, :illustration_image_url, :registration_date)");
 
                 $toto = $addUser->execute([
                             'pseudo' => $pseudo,
                             'password' => $password,
                             'email_adress' => $email,
                             'illustration_image_url' => $imgDefault,
+                            'registration_date' => date("Y-m-d"),
                         ]);
             } else {
                 echo "<p>Mot de passe incorrect !</p>";
