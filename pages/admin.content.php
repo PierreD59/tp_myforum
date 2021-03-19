@@ -78,8 +78,8 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php'; ?>
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <?php $query = $database->query('SELECT * FROM `comments`');
-                    while (($data = $query->fetch())) { ?>
+                <?php $query = $database->query('SELECT * FROM `comments`');
+                while (($data = $query->fetch())) { ?>
                     <tr>
                         <td><a href="?page=article&id=<?= $data['id']; ?>"><?= $data['pseudo']; ?></a></td>
                         <td><?= $data['comment']; ?></td>
@@ -87,8 +87,7 @@ $database = require_once dirname(__FILE__) . '/../utils/database.utils.php'; ?>
                         <td><a href="?page=edit&id=<?= $data['id']; ?>"><i class="fas fa-cog p-1"></i></a></td>
                         <td><a href="?page=delete&id=<?= $data['id']; ?>"><i class="fas fa-times p-1"></i></a></td>
                     </tr>
-
-                    <?php } ?>
+                <?php } ?>
                 </tbody>
             </table>
         </div>

@@ -28,6 +28,7 @@ if (isset($_POST['categorySubmit'])) {
         <hr>
         <div class="col-md-6 row m-auto p-0">
 
+<?php if(isset($_SESSION['pseudo'])) { ?>
             <div class="categoryBlock">
                 <div class="p-5">
                     <h2 class="text-center">Ajouter une Catégorie</h2>
@@ -43,7 +44,9 @@ if (isset($_POST['categorySubmit'])) {
                     </form>
                 </div>
             </div>
-
+        <?php } else { ?>
+            <h2>Vous devez vous connecter pour créer une catégorie</h2>
+        <?php } ?>
         </div>
 
 </div>
