@@ -1,5 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 
 // Calls up the content of the article in relation to its ID
 $query = $database->query('SELECT * FROM `articles` WHERE `id` =' . $_GET['id']);
@@ -49,7 +48,7 @@ if (isset($_POST['commentSubmit'])) {
 
             <div class="row">
                 <div class="col-md-6 d-flex justify-content-start">
-                    <p>Posté le <?= $data['publiched_date']; ?> par <?= $data['author']; ?></p>
+                    <p>Posté le <strong><?= $data['publiched_date']; ?></strong> par <strong><?= $data['author']; ?></strong></p>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                 <?php if (isset($_SESSION['pseudo'])) { ?>
@@ -66,7 +65,7 @@ if (isset($_POST['commentSubmit'])) {
 
     <div class="container my-3">
         <div class="row d-flex justify-content-center m-0 p-0">
-            <div class="commentBlock p-5 col-md-4 border-end m-3">
+            <div class="commentBlock commentForm p-5 col-md-4 border-end m-3">
                 <h2>Envoyer un commentaire</h2>
                 <hr>
                 <form method="post" class="p-3" action="?page=article&id=<?= $data['id']; ?>">
@@ -97,16 +96,17 @@ if (isset($_POST['commentSubmit'])) {
             <?php $query = $database->query('SELECT * FROM `comments` WHERE `article_id` =' . $_GET['id']);
             while (($dataComment = $query->fetch())) { ?>
 
-                <div class="commentBlock border m-3 p-3">
+                <div class="commentBlock border m-3 py-3 px-5">
                     <div class="d-flex justify-content-end">
                     <?php if (isset($_SESSION['pseudo'])) { ?>
                         <a href="?page=edit&id=<?= $dataComment['id']; ?>"><i class="fas fa-cog p-1"></i></a>
                         <a href="?page=delete&id=<?= $dataComment['id']; ?>"><i class="fas fa-times p-1"></i></a>
                     <?php } ?>
                     </div>
-                    <p><?= $dataComment['pseudo'] ?></p>
-                    <p><?= $dataComment['publiched_date']; ?></p>
+                    <h2 class="text-center text-capitalize"><?= $dataComment['pseudo'] ?></h2>
+                    <hr>
                     <p><?= $dataComment['comment']; ?></p>
+                    <p class="text-end"><strong><?= $dataComment['publiched_date']; ?></strong></p>
                 </div>
 
             <?php } ?>

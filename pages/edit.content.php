@@ -1,5 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 
 // Calls the ID of the category table
 $query = $database->prepare('SELECT * FROM `categorys` WHERE `id` = :id');

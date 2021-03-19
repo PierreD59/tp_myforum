@@ -2,6 +2,9 @@
 
 session_start();
 
+$database = require_once dirname(__FILE__) . '/utils/database.utils.php';
+require('utils/last_connexion.php');
+
 require_once dirname(__FILE__) . '/includes/top.inc.php';
 
 if (isset($_GET['page'])) {

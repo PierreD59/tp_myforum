@@ -1,5 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 
 // Call category's ID
 

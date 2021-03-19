@@ -1,6 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
-
 $query = $database->prepare('SELECT `password` FROM `users`');
 $query->execute([
      "password" => ':password',

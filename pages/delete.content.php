@@ -1,5 +1,4 @@
 <?php
-$database = require_once dirname(__FILE__) . '/../utils/database.utils.php';
 
 $id = $_GET['id'];
 
@@ -20,5 +19,11 @@ $deleteCategory = $database->prepare("DELETE FROM `categorys` WHERE id = :id ");
 $deleteCategory->execute([
     "id" => $id,
 ]);
-header('Location:?page=admin');
+
+// Delete the data from the comment table
+$deleteUser = $database->prepare("DELETE FROM `users` WHERE id = :id ");
+$deleteUser->execute([
+    "id" => $id,
+]);
+header('Location:?page=home');
 
