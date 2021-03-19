@@ -52,8 +52,10 @@ if (isset($_POST['commentSubmit'])) {
                     <p>Posté le <?= $data['publiched_date']; ?> par <?= $data['author']; ?></p>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
+                <?php if (isset($_SESSION['pseudo'])) { ?>
                     <a href="?page=edit&id=<?= $data['id']; ?>"><i class="fas fa-cog p-1"></i></a>
                     <a href="?page=delete&id=<?= $data['id']; ?>"><i class="fas fa-times p-1"></i></a>
+                <?php } ?>
                 </div>
             </div>
         </div>
@@ -97,8 +99,10 @@ if (isset($_POST['commentSubmit'])) {
 
                 <div class="commentBlock border m-3 p-3">
                     <div class="d-flex justify-content-end">
+                    <?php if (isset($_SESSION['pseudo'])) { ?>
                         <a href="?page=edit&id=<?= $dataComment['id']; ?>"><i class="fas fa-cog p-1"></i></a>
                         <a href="?page=delete&id=<?= $dataComment['id']; ?>"><i class="fas fa-times p-1"></i></a>
+                    <?php } ?>
                     </div>
                     <p><?= $dataComment['pseudo'] ?></p>
                     <p><?= $dataComment['publiched_date']; ?></p>
