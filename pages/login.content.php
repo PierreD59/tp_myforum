@@ -1,24 +1,23 @@
 <?php
-$query = $database->prepare('SELECT `password` FROM `users`');
-$query->execute([
-     "password" => ':password',
-     ]);
-$password = $query->fetch();
-
 if (isset($_POST['submit'])) {
     if (isset($_POST['pseudo']) && !empty($_POST['pseudo'])) {
-        if (isset($_POST['password']) && !empty($_POST['password']) && password_verify($_POST['password'], $password['password'])) {
-            $_SESSION['pseudo'] = $_POST['pseudo'];
-            $_SESSION['password'] = $_POST['password'];
-
-            header('Location: ?page=home');
+        $query = $database->prepare('SELECT * FROM `users` WHERE `pseudo` = :pseudo');
+            $query->execute([
+                "pseudo" => $_POST['pseudo'],
+            ]);
+            $user = $query->fetch();
+            if ($user && isset($_POST['password']) && !empty($_POST['password']) && password_verify($_POST['password'], $user['password'])) {
+                $_SESSION['pseudo'] = $_POST['pseudo'];
+    
+                // header('Location: ?page=home');
+            } else {
+                echo "<p>Identifiants incorrect !</p>";
+            }
         } else {
             echo "<p>Identifiants incorrect !</p>";
-        }
-    } else {
-        echo "<p>Identifiants incorrect !</p>";
     }
 }
+
 ?>
 
 <div class="loginBloc container">
