@@ -1,25 +1,33 @@
 <?php 
 // Calls up the content of the user in relation to its ID
-$query = $database->query('SELECT * FROM `users` WHERE `id` =' . $_GET['id']);
-$data = $query->fetch()
+$query = $database->prepare('SELECT * FROM `users` WHERE `id` = :id');
+$query->execute([
+     "id" => $_GET['id'],
+     ]);
+$user = $query->fetch();
 ?>
+
 <div class="home">
 
-<h1>Page de profile</h1>
+<h1>Page de profil</h1>
 <hr>
-<div class="profileBlock">
+<div class="container toto">
 
     <div class="row p-3 m-0">
-        <div class="detailProfile col-md-8 border-end">
-            <h2>Information de user</h2>
+        <div class="profileBlock detailProfile p-3 col-md-6 border-end">
+            <h2>Information de <?= $user['pseudo']; ?></h2>
             <ul>
-                <li>Adresse mail : </li>
-                <li>Date d'inscription : </li>
-                <li>Messages : </li>              
+                <li>Adresse mail : <?php $user['email_adress']; ?></li>
+                <li>Date d'inscription : <?php $user['registration_date']; ?></li>
+                <?php $count = $database->prepare('SELECT * FROM `articles` WHERE user_id =' . $user['id']);
+                    $count->execute();
+                    $countUser = $count->rowCount(); ?>
+                <li>Messages : <?= $countUser; ?></li>              
             </ul>
         </div>
-        <div class="imgProfile col-md-4">
+        <div class="profileBlock imgProfile col-md-4">
             <h2>Photo de Profil</h2>
+            <img src="<?= $user['illustration_image_url']; ?>" alt="Photo profil">
         </div>
 
     </div>

@@ -29,6 +29,7 @@ if (isset($_POST['editCategorySubmit'])) {
         $editCategory->execute([
             "name" => $editName,
         ]);
+        header("Location: ?page=home");
     }
 }
 
@@ -49,6 +50,7 @@ if (isset($_POST['editArticle'])) {
                     "chapeau" => $editChapeau,
                     "content" => $editContent,
                     ]);
+                header("Location: ?page=category");
             } 
         }
     }
@@ -63,6 +65,8 @@ if (isset($_POST['editComment'])) {
         $toto = $editArticle->execute([
             "comment" => $editContent,
             ]);
+        header("Location: ?page=article");
+        
     } 
 }
 

@@ -25,7 +25,6 @@ if (isset($_SESSION['pseudo'])) {
 if (isset($_POST['commentSubmit'])) {
     if (isset($_POST['comment']) && !empty($_POST['comment'])) {
         $addComment = $database->prepare("INSERT INTO `comments`(`pseudo`, `comment`, `publiched_date`, `article_id`, `user_id`) VALUES (:pseudo, :comment, :publiched_date, :article_id, :user_id)");
-        echo $_GET['id'] . "<br>" . $userID;
         $addComment->execute([
             "pseudo" => $pseudo,
             "comment" => $_POST['comment'],
@@ -33,6 +32,7 @@ if (isset($_POST['commentSubmit'])) {
             "article_id" => $_GET['id'],
             "user_id" => $userID,
         ]);
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     } 
 }
 ?>
