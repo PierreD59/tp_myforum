@@ -32,8 +32,9 @@ if (isset($_POST['articleSubmit'])) {
                     "author" => $_SESSION['pseudo'],
                     "chapeau" => $chapeau,
                     "category_id" => $_GET['id'],
-                    "user_id" => $userID['id'],
+                    "user_id" => $_SESSION['id'],
                 ]);
+                header("Location: " . $_SERVER['HTTP_REFERER']);
             } else {
                 echo "Entrez un contenu";
             }

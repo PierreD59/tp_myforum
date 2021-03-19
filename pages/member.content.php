@@ -21,7 +21,7 @@
                         <td><a href="?page=profile&id=<?= $data['id']; ?>"><?= $data['pseudo']; ?></a></td>
                         <td><?= $data['registration_date']; ?></td>
                         <td><?= $data['last_connection']; ?></td>
-                        <?php $count = $database->prepare('SELECT * FROM `articles`');
+                        <?php $count = $database->prepare('SELECT * FROM `articles` WHERE user_id =' . $data['id']);
                         $count->execute();
                         $countUser = $count->rowCount(); ?>
                         <td><?= $countUser; ?></td>

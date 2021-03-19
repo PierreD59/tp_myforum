@@ -11,12 +11,13 @@ if (isset($_POST['submit'])) {
                 $addUser = $database->prepare("INSERT INTO `users`(`pseudo`, `password`, `email_adress`, `illustration_image_url`, `registration_date`) VALUES (:pseudo, :password, :email_adress, :illustration_image_url, :registration_date)");
 
                 $toto = $addUser->execute([
-                            'pseudo' => $pseudo,
+                            'pseudo' => ucfirst($pseudo),
                             'password' => $password,
                             'email_adress' => $email,
                             'illustration_image_url' => $imgDefault,
                             'registration_date' => date("Y-m-d"),
                         ]);
+                header('Location :?page=login');
             } else {
                 echo "<p>Mot de passe incorrect !</p>";
             }
@@ -29,42 +30,47 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<div class="registerBloc container">
+<div class="home">
 
-    <form class="p-3" action="?page=register" method="post">
+    <div class="registerBlock p-3 container">
+        <h1>S'inscrire</h1>
+        <hr>
+        <form class="p-3" action="?page=register" method="post">
 
-        <div class="mb-3">
-            <label for="pseudo" class="form-label">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="pseudo">
-        </div>
+            <div class="mb-3">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo">
+            </div>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Adresse mail</label>
-            <input type="email" class="form-control" id="email" name="email">
-        </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Adresse mail</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
 
-        <div class="mb-3">
-            <label for="confirmEmail" class="form-label">Confirmer l'adresse mail</label>
-            <input type="email" class="form-control" id="confirmEmail" name="confirmEmail">
-        </div>
+            <div class="mb-3">
+                <label for="confirmEmail" class="form-label">Confirmer l'adresse mail</label>
+                <input type="email" class="form-control" id="confirmEmail" name="confirmEmail">
+            </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
 
-        <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-        </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+            </div>
 
-        <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control" id="image" name="image" placeholder="../assets/img/default.png">
-        </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="../assets/img/default.png">
+            </div>
 
-        <input class="btn btn-primary" type="submit" name="submit" value="S'inscrire">
+            <input class="btn btn-primary" type="submit" name="submit" value="S'inscrire">
 
-    </form>
+        </form>
+
+    </div>
 
 </div>

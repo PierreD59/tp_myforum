@@ -1,10 +1,18 @@
 .categoryBlock,
 .articleBlock,
-.commentBlock {
+.commentBlock,
+.loginBlock,
+.registerBlock,
+.profileBlock {
   background: white;
   border: 1px solid #e1e1e1;
   margin: 15px auto;
   box-shadow: 7px 7px 0 0 #e1e1e1;
+  height: auto;
+}
+
+.toto .profileBlock {
+  height: 100%;
 }
 
 .commentForm {

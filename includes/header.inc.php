@@ -12,7 +12,7 @@
                             <a class="nav-link" href="/?page=member">Membres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/?page=profile">Profil</a>
+                            <a class="nav-link" href="/?page=profile&id=<?= $_SESSION['id']; ?>">Profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/?page=admin">Admin</a>

@@ -7,9 +7,9 @@ if (isset($_POST['submit'])) {
             ]);
             $user = $query->fetch();
             if ($user && isset($_POST['password']) && !empty($_POST['password']) && password_verify($_POST['password'], $user['password'])) {
+                $_SESSION['id'] = $user['id'];
                 $_SESSION['pseudo'] = $_POST['pseudo'];
-    
-                // header('Location: ?page=home');
+                header('Location: ?page=home');
             } else {
                 echo "<p>Identifiants incorrect !</p>";
             }
@@ -20,22 +20,27 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<div class="loginBloc container">
+<div class="home">
 
-    <form class="p-3" action="?page=login" method="post">
+    <div class="loginBlock p-3 container">
+        <h1>Se connecter</h1>
+        <hr>
+        <form class="p-3" action="?page=login" method="post">
 
-        <div class="mb-3">
-            <label for="pseudo" class="form-label">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="pseudo">
-        </div>
+            <div class="mb-3">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo">
+            </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
 
-        <input class="btn btn-primary" type="submit" name="submit" value="S'inscrire">
+            <input class="btn btn-primary" type="submit" name="submit" value="S'inscrire">
 
-    </form>
+        </form>
+
+    </div>
 
 </div>
